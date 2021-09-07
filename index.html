@@ -2,8 +2,72 @@
 <html>
 <head>
     <title>Inicio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
 </head>
 <body>
-    <h1>XD</h1>
+
+    <table id="tabla" class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido Paterno</th>
+                <th>Correo Electrónico</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+
+    <form>
+        <div class="mb-3">
+            <label class="form-label">Nombre:</label>
+            <input class="form-controll" id="first_name">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Apellido Paterno:</label>
+            <input class="form-controll" id="last_name">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Correo Electrónico:</label>
+            <input class="form-controll" id="email">
+        </div>
+    </form>
+    <button class="btn btn-success" onclick="registrar()">Registrar</button>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+<script>
+    fetch("https://reqres.in/api/users?page=2").then(respuesta => respuesta.json()).then(resJson =>{
+        resJson.data.forEach(element => {
+            console.log(element);
+            var referencia = document.getElementById("tabla").getElementsByTagName("tbody")[0];
+            var nuevaFila = referencia.insertRow();
+            var nuevaCelda = nuevaFila.insertCell(0);
+            var nuevaCeldaDos = nuevaFila.insertCell(1);
+            var nuevaCeldaTres = nuevaFila.insertCell(2);
+            nuevaCelda.innerHTML = element.first_name;
+            nuevaCeldaDos.innerHTML = element.last_name;
+            nuevaCeldaTres.innerHTML = element.email;
+        });
+        console.log(resJson);
+    });
+
+    function registrar(){
+        var referencia = document.getElementById("tabla").getElementsByTagName("tbody")[0];
+        var nuevaFila = referencia.insertRow();
+        var nuevaCelda = nuevaFila.insertCell(0);
+        var nuevaCeldaDos = nuevaFila.insertCell(1);
+        var nuevaCeldaTres = nuevaFila.insertCell(2);
+        nuevaCelda.innerHTML = document.getElementById("first_name").value;
+        nuevaCeldaDos.innerHTML = document.getElementById("last_name").value;
+        nuevaCeldaTres.innerHTML = document.getElementById("email").value;
+        limpiar();
+    }
+    function limpiar(){
+        document.getElementById("first_name").value = "";
+        document.getElementById("last_name").value = "";
+        document.getElementById("email").value = "";
+    }
+</script>
 </html>
