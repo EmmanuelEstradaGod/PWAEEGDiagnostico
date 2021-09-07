@@ -47,7 +47,7 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 <script>
-    fetch("https://reqres.in/api/users?page=2").then(respuesta => respuesta.json()).then(resJson =>{
+    fetch("https://reqres.in/api/users").then(respuesta => respuesta.json()).then(resJson =>{
         resJson.data.forEach(element => {
             console.log(element);
             var referencia = document.getElementById("tabla").getElementsByTagName("tbody")[0];
@@ -78,6 +78,10 @@
         document.getElementById("last_name").value = "";
         document.getElementById("email").value = "";
     }
+    function limpiarDos(){
+        document.getElementById("name").value = "";
+        document.getElementById("job").value = "";
+    }
     function registrarDos(){
         var objeto = {};
         objeto.name = document.getElementById("name").value;
@@ -95,6 +99,7 @@
         .then(response => console.log('Success:', response));
 
         alert("verificar consola - Estructura de JSON de consulta y registro distintos")
+        limpiarDos();
     }
 </script>
 </html>
